@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer')
 const fs = require('fs')
 const os = require('os')
 
+
 let list = async () => {
        const browser = await puppeteer.launch({
         executablePath: './chrome-win/chrome.exe',
@@ -29,16 +30,16 @@ let list = async () => {
                         const description = article.querySelector('.ec_desc span')
                         
                         return {
-                        title: title?.innerHTML,
+                        title: (title?.innerHTML).replace(/<[^>]+>/g,''),
                         description: description?.innerHTML
                         }
                 },article))
        }
 
         const data = await Promise.all(collects)
-        console.log('data',data)
+        return data
        await browser.close()
 
 }
 
-list()
+module.exports = list

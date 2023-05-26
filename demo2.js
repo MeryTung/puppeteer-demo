@@ -24,7 +24,6 @@ async function run() {
 
   // 提取搜索结果
   const searchResults = await page.$$eval('.result', (results) => {
-        console.log(results);
     return results.map((result) => {
       const titleElement = result.querySelector('.t');
       const title = titleElement.textContent;
